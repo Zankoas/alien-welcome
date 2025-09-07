@@ -58,11 +58,18 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     document.getElementById("login-screen").style.display = "none";
     document.getElementById("secure-screen").style.display = "block";
 
-    const message =
-      `Welcome, operative ${username}.
-      Classified mission data follows...
-      “Building Better Worlds.”`
-      ;
+    // Play sounds
+    const hum = document.getElementById("ambient-hum");
+    const beep = document.getElementById("beep-sound");
+    hum.volume = 0.4;   // subtle hum
+    hum.play();
+    beep.play();
+
+    // Typewriter effect
+    const message = `Welcome, operative ${username}.
+Classified mission data follows...
+“Building Better Worlds.”`;
+
     const typedTextElement = document.getElementById("typed-text");
     typewriter(message, typedTextElement, 40, () => {
       const group = document.getElementById("button-group");
