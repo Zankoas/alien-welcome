@@ -1,3 +1,4 @@
+1:2
 ripley:nostromo
 hicks:smartgun
 ash:synthetic
