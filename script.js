@@ -15,23 +15,27 @@ async function checkCredentials(username, password) {
   return false;
 }
 
-function typewriter(text, element, speed = 50, callback = null) {
+// Typewriter function with append support
+function typewriter(text, element, speed = 50, callback = null, append = false) {
   let i = 0;
+  const existing = append ? element.innerHTML.replace(/<span class="cursor"><\/span>/, "") : "";
+
   function typing() {
     if (i < text.length) {
-      element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+      element.innerHTML = existing + text.substring(0, i + 1) + '<span class="cursor"></span>';
       i++;
       setTimeout(typing, speed);
     } else {
-      element.innerHTML = text + '<span class="cursor"></span>';
+      element.innerHTML = existing + text + '<span class="cursor"></span>';
       if (callback) callback();
     }
   }
   typing();
 }
 
+// Load mission text file
 async function fetchMissionData() {
-  const response = await fetch("mac_message.txt");
+  const response = await fetch("mission.txt"); // make sure mission.txt exists in root
   return await response.text();
 }
 
@@ -51,9 +55,13 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     // Play success sounds
     const hum = document.getElementById("ambient-hum");
     const beep = document.getElementById("beep-sound");
-    hum.volume = 0.4;
-    hum.play();
-    beep.play();
+    if (hum) {
+      hum.volume = 0.4;
+      hum.play();
+    }
+    if (beep) {
+      beep.play();
+    }
 
     // First typed message
     const message = `Welcome, operative ${username}.
@@ -62,14 +70,14 @@ Classified mission data follows...\n`;
     const typedTextElement = document.getElementById("typed-text");
 
     typewriter(message, typedTextElement, 40, async () => {
-      // Fetch mac_message.txt and type it
+      // Fetch mission.txt and append it
       const missionData = await fetchMissionData();
       typewriter("\n" + missionData, typedTextElement, 30, () => {
         // Reveal button group after mission data
         const group = document.getElementById("button-group");
         group.style.display = "flex";
         setTimeout(() => group.classList.add("show"), 100);
-      });
+      }, true); // append mission data
     });
   } else {
     errorEl.textContent = "ACCESS DENIED";
@@ -77,8 +85,10 @@ Classified mission data follows...\n`;
 
     // Play failure alarm
     const alarm = document.getElementById("alarm-sound");
-    alarm.volume = 0.7;
-    alarm.play();
+    if (alarm) {
+      alarm.volume = 0.7;
+      alarm.play();
+    }
   }
 });
 
