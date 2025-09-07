@@ -58,10 +58,10 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     document.getElementById("login-screen").style.display = "none";
     document.getElementById("secure-screen").style.display = "block";
 
-    // Play sounds
+    // Play success sounds
     const hum = document.getElementById("ambient-hum");
     const beep = document.getElementById("beep-sound");
-    hum.volume = 0.4;   // subtle hum
+    hum.volume = 0.4;
     hum.play();
     beep.play();
 
@@ -78,5 +78,10 @@ Classified mission data follows...
     });
   } else {
     document.getElementById("error").textContent = "ACCESS DENIED";
+
+    // Play failure alarm
+    const alarm = document.getElementById("alarm-sound");
+    alarm.volume = 0.7;
+    alarm.play();
   }
 });
