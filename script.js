@@ -46,11 +46,17 @@ function typewriter(text, element, speed = 50, callback = null) {
   typing();
 }
 
+async function fetchMissionData() {
+  const response = await fetch("mission.txt");
+  return await response.text();
+}
+
 document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value.trim();
+  const errorEl = document.getElementById("error");
 
   const ok = await checkCredentials(username, password);
 
@@ -65,23 +71,41 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     hum.play();
     beep.play();
 
-    // Typewriter effect
+    // First typed message
     const message = `Welcome, operative ${username}.
-Classified mission data follows...
-“Building Better Worlds.”`;
+Classified mission data follows...\n`;
 
     const typedTextElement = document.getElementById("typed-text");
-    typewriter(message, typedTextElement, 40, () => {
-      const group = document.getElementById("button-group");
-      group.style.display = "flex";
-      setTimeout(() => group.classList.add("show"), 100);
+
+    typewriter(message, typedTextElement, 40, async () => {
+      // Fetch mission.txt and type it
+      const missionData = await fetchMissionData();
+      typewriter("\n" + missionData, typedTextElement, 30, () => {
+        // Reveal button group after mission data
+        const group = document.getElementById("button-group");
+        group.style.display = "flex";
+        setTimeout(() => group.classList.add("show"), 100);
+      });
     });
   } else {
-    document.getElementById("error").textContent = "ACCESS DENIED";
+    errorEl.textContent = "ACCESS DENIED";
+    errorEl.classList.add("flash-error");
 
     // Play failure alarm
     const alarm = document.getElementById("alarm-sound");
     alarm.volume = 0.7;
     alarm.play();
   }
+});
+
+// Remove flashing effect when user starts typing again
+document.getElementById("username").addEventListener("input", () => {
+  const errorEl = document.getElementById("error");
+  errorEl.classList.remove("flash-error");
+  errorEl.textContent = "";
+});
+document.getElementById("password").addEventListener("input", () => {
+  const errorEl = document.getElementById("error");
+  errorEl.classList.remove("flash-error");
+  errorEl.textContent = "";
 });

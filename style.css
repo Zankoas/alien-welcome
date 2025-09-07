@@ -147,3 +147,14 @@ body::after {
   0%, 100% { opacity: 0.05; }
   50% { opacity: 0.2; }
 }
+
+.flash-error {
+  color: red;
+  font-weight: bold;
+  animation: flash 0.5s step-start infinite;
+  text-shadow: 0 0 8px red, 0 0 16px red;
+}
+
+@keyframes flash {
+  50% { opacity: 0; }
+}
