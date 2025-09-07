@@ -58,14 +58,16 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     document.getElementById("login-screen").style.display = "none";
     document.getElementById("secure-screen").style.display = "block";
 
-    const message = `Welcome, operative ${username}.
-Classified mission data follows...
-“Building Better Worlds.”`;
-
+    const message =
+      `Welcome, operative ${username}.
+      Classified mission data follows...
+      “Building Better Worlds.”`
+      ;
     const typedTextElement = document.getElementById("typed-text");
     typewriter(message, typedTextElement, 40, () => {
-      // Reveal the button group after text finishes typing
-      document.getElementById("button-group").style.display = "flex";
+      const group = document.getElementById("button-group");
+      group.style.display = "flex";
+      setTimeout(() => group.classList.add("show"), 100);
     });
   } else {
     document.getElementById("error").textContent = "ACCESS DENIED";
