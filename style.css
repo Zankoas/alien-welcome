@@ -74,3 +74,23 @@ button:hover {
   color: #00ff88;
   border: 1px solid #00ff88;
 }
+
+#typed-text {
+  font-size: 1.1em;
+  margin-top: 10px;
+  white-space: pre-line;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  background-color: #00ff88;
+  animation: blink 1s steps(1) infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  50% {
+    background-color: transparent;
+  }
+}

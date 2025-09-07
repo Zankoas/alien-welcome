@@ -30,3 +30,44 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     document.getElementById("error").textContent = "ACCESS DENIED";
   }
 });
+
+function typewriter(text, element, speed = 50, callback = null) {
+  let i = 0;
+  function typing() {
+    if (i < text.length) {
+      element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+      i++;
+      setTimeout(typing, speed);
+    } else {
+      element.innerHTML = text + '<span class="cursor"></span>';
+      if (callback) callback();
+    }
+  }
+  typing();
+}
+
+document.getElementById("login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  const ok = await checkCredentials(username, password);
+
+  if (ok) {
+    document.getElementById("login-screen").style.display = "none";
+    document.getElementById("secure-screen").style.display = "block";
+
+    const message = `Welcome, operative ${username}.
+Classified mission data follows...
+“Building Better Worlds.”`;
+
+    const typedTextElement = document.getElementById("typed-text");
+    typewriter(message, typedTextElement, 40, () => {
+      // Reveal the button group after text finishes typing
+      document.getElementById("button-group").style.display = "flex";
+    });
+  } else {
+    document.getElementById("error").textContent = "ACCESS DENIED";
+  }
+});
