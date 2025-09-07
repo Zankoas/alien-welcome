@@ -15,22 +15,6 @@ async function checkCredentials(username, password) {
   return false;
 }
 
-document.getElementById("login-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  const ok = await checkCredentials(username, password);
-
-  if (ok) {
-    document.getElementById("login-screen").style.display = "none";
-    document.getElementById("secure-screen").style.display = "block";
-  } else {
-    document.getElementById("error").textContent = "ACCESS DENIED";
-  }
-});
-
 function typewriter(text, element, speed = 50, callback = null) {
   let i = 0;
   function typing() {
@@ -47,7 +31,7 @@ function typewriter(text, element, speed = 50, callback = null) {
 }
 
 async function fetchMissionData() {
-  const response = await fetch("mission.txt");
+  const response = await fetch("mac_message.txt");
   return await response.text();
 }
 
@@ -78,7 +62,7 @@ Classified mission data follows...\n`;
     const typedTextElement = document.getElementById("typed-text");
 
     typewriter(message, typedTextElement, 40, async () => {
-      // Fetch mission.txt and type it
+      // Fetch mac_message.txt and type it
       const missionData = await fetchMissionData();
       typewriter("\n" + missionData, typedTextElement, 30, () => {
         // Reveal button group after mission data
