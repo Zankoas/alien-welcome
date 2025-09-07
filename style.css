@@ -1,0 +1,76 @@
+body {
+  background-color: black;
+  color: #00ff88;
+  font-family: "Courier New", monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.alien-title {
+  font-size: 2em;
+  text-shadow: 0 0 10px #00ff88;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  background: black;
+  border: 1px solid #00ff88;
+  color: #00ff88;
+  padding: 8px;
+}
+
+button {
+  background: #00ff88;
+  border: none;
+  color: black;
+  padding: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: black;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+}
+
+#error {
+  color: red;
+  margin-top: 10px;
+}
+
+.button-group {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+}
+
+.button-group a {
+  padding: 10px 15px;
+  background: #00ff88;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 0 8px #00ff88;
+}
+
+.button-group a:hover {
+  background: black;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+}

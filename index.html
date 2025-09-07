@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weyland-Yutani Secure Terminal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="login-screen">
+    <h1 class="alien-title">WEYLAND-YUTANI TERMINAL</h1>
+    <p class="subtitle">Enter credentials to proceed</p>
+    <form id="login-form">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Access</button>
+    </form>
+    <p id="error"></p>
+  </div>
+
+  <div id="secure-screen" style="display:none;">
+    <h2 class="alien-title">ACCESS GRANTED</h2>
+    <p>Welcome, operative. Classified mission data follows...</p>
+    <p><em>“Building Better Worlds.”</em></p>
+
+    <div class="button-group">
+      <a href="https://www.aliensvspredator.net/" target="_blank">AVP Site</a>
+      <a href="https://www.imdb.com/title/tt0078748/" target="_blank">Alien IMDb</a>
+      <a href="https://www.weylandindustries.com/" target="_blank">Weyland Industries</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
