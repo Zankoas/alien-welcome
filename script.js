@@ -96,8 +96,8 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
       { text: `Welcome operative`, speed: 50 },
       { text: ` ${username.toUpperCase()}.`, speed: 800 },
       { text: `\nClassified message received...`, speed: 50 },
-      { text: `\n\nDECRYPTING...\nDECRYPTING...\nDECRYPTING...`, speed: 200 },
-      { text: `\n\nDECRYPTED!\n\n`, speed: 50 }
+      { text: `\n\n> DECRYPTING...\n> DECRYPTING...\n> DECRYPTING...`, speed: 200 },
+      { text: `\n\n> DECRYPTED\n\n`, speed: 50 }
     ];
 
     function typeMessages(index = 0) {
