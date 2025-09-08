@@ -86,7 +86,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     // Step 2: pause, then fade in ACCESS GRANTED
     setTimeout(() => {
       if (accessGranted) accessGranted.classList.add("show");
-    }, 4000);
+    }, 3000);
 
     // Step 3: pause again, then start typing text
     setTimeout(() => {
@@ -95,7 +95,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     const messages = [
       { text: `Welcome operative`, speed: 50 },
       { text: ` ${username.toUpperCase()}.`, speed: 800 },
-      { text: `\nClassified message follows...`, speed: 50 },
+      { text: `\nClassified message received...`, speed: 50 },
       { text: `\n\nDECRYPTING...\nDECRYPTING...\nDECRYPTING...`, speed: 200 },
       { text: `\n\nDECRYPTED!\n\n`, speed: 50 }
     ];
@@ -113,9 +113,9 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
     async function startMission() {
       const missionData = await fetchMissionData();
-      typewriter("\n" + missionData, typedTextElement, 5, () => {
+      typewriter("\n" + missionData, typedTextElement, 25, () => {
         // After mission data finishes, type final message
-        typewriter(`\n\n> END OF MESSAGE`, typedTextElement, 150, () => {
+        typewriter(`\n\n> END OF MESSAGE`, typedTextElement, 200, () => {
           // Reveal button group after final message
           const group = document.getElementById("button-group");
           group.style.display = "flex";
@@ -131,7 +131,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     // Start multi-part intro typing
     typeMessages();
 
-  }, 8000); // start typing after ACCESS GRANTED
+  }, 6500); // start typing after ACCESS GRANTED
 
   } else {
     errorEl.textContent = "ACCESS DENIED";
