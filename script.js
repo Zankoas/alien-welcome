@@ -79,11 +79,13 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     typewriter(message, typedTextElement, 25, async () => {
       // Fetch mission.txt and append it
       const missionData = await fetchMissionData();
-      typewriter("\n" + missionData, typedTextElement, 5, () => {
-        // Reveal button group after mission data
-        const group = document.getElementById("button-group");
-        group.style.display = "flex";
-        setTimeout(() => group.classList.add("show"), 1500);
+      typewriter("\n" + missionData, typedTextElement, 2.5, () => {
+        typewriter(`\n\n> END TRANSMISSION`, typedTextElement, 200, () => {
+          // Reveal button group after mission data
+          const group = document.getElementById("button-group");
+          group.style.display = "flex";
+          setTimeout(() => group.classList.add("show"), 1000);
+        }, true);
       }, true);
     });
   } else {
