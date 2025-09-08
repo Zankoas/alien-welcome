@@ -1,4 +1,1 @@
-cake:cake
-ripley:nostromo
-hicks:smartgun
-ash:synthetic
+CAKE:cake
