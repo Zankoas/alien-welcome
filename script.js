@@ -71,23 +71,42 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
       }
     }, 1200);
 
-    // First typed message
-    const message = `Welcome operative ${username.toUpperCase()}.\nEncrypted message as follows...\n\nDECRYPTING...DECRYPTING...DECRYPTING...\n\nDECRYPTED!\n\n\n`;
-
+    // Reference typed text element
     const typedTextElement = document.getElementById("typed-text");
 
-    typewriter(message, typedTextElement, 25, async () => {
-      // Fetch mission.txt and append it
-      const missionData = await fetchMissionData();
-      typewriter("\n" + missionData, typedTextElement, 2.5, () => {
-        typewriter(`\n\n> END TRANSMISSION`, typedTextElement, 200, () => {
-          // Reveal button group after mission data
-          const group = document.getElementById("button-group");
-          group.style.display = "flex";
-          setTimeout(() => group.classList.add("show"), 1000);
+    // Multi-part intro messages
+    const messages = [
+      { text: `Welcome operative`, speed: 50 },
+      { text: ` ${username.toUpperCase()}.`, speed: 800 },
+      { text: `\nClassified message follows...`, speed: 50 },
+      { text: `\n\nDECRYPTING...\nDECRYPTING...\nDECRYPTING...`, speed: 200 },
+      { text: `\n\nDECRYPTED!\n\n`, speed: 50 }
+    ];
+
+    function typeMessages(index = 0) {
+      if (index < messages.length) {
+        typewriter(messages[index].text, typedTextElement, messages[index].speed, () => {
+          typeMessages(index + 1);
         }, true);
+      } else {
+        // Pause before mission
+        setTimeout(startMission, 1500);
+      }
+    }
+
+    async function startMission() {
+      const missionData = await fetchMissionData();
+      typewriter("\n" + missionData, typedTextElement, 5, () => {
+        // Reveal button group after mission data
+        const group = document.getElementById("button-group");
+        group.style.display = "flex";
+        setTimeout(() => group.classList.add("show"), 1500);
       }, true);
-    });
+    }
+
+    // Start multi-part intro typing
+    typeMessages();
+
   } else {
     errorEl.textContent = "ACCESS DENIED";
     errorEl.classList.add("flash-error");
