@@ -8,7 +8,7 @@ body {
   position: relative;
 }
 
-/* Wrap content so CRT curvature applies to all overlays */
+/* Wrap content so CRT curvature applies */
 #crt-wrapper {
   width: 100%;
   height: 100%;
@@ -31,7 +31,7 @@ body {
   }
 }
 
-/* Glow on headings and UI */
+/* Glow */
 .alien-title, #typed-text, input, button, a {
   text-shadow: 0 0 8px #00ff88, 0 0 16px #00ff88;
 }
@@ -45,7 +45,15 @@ body {
   margin-bottom: 20px;
 }
 
-/* Login form */
+/* Login screen stays centered */
+#login-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 #login-form {
   display: flex;
   flex-direction: column;
@@ -81,22 +89,22 @@ button:hover {
 
 /* Access granted screen */
 #secure-screen {
-  text-align: center; /* Center ACCESS GRANTED */
+  text-align: center; /* center ACCESS GRANTED heading */
 }
 
+/* Main text box */
 #typed-text {
   font-size: 1.1em;
-  margin-top: 20px;
+  margin-top: 20vh;       /* start 20% down the screen */
   white-space: pre-line;
   width: 50%;
-  max-width: none;
   height: 300px;
   overflow-y: auto;
   padding: 10px;
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.85);
   border-radius: 6px;
-  text-align: left; /* keep typed text left-aligned */
+  text-align: left;
   margin-left: auto;
   margin-right: auto;
 }
@@ -108,7 +116,7 @@ button:hover {
   }
 }
 
-/* Cursor for typewriter effect */
+/* Cursor */
 .cursor {
   display: inline-block;
   width: 8px;
@@ -118,9 +126,7 @@ button:hover {
 }
 
 @keyframes blink {
-  50% {
-    background-color: transparent;
-  }
+  50% { background-color: transparent; }
 }
 
 /* Links stacked vertically */
@@ -164,10 +170,10 @@ button:hover {
   50% { opacity: 0; }
 }
 
-/* CRT scanline overlay */
+/* CRT scanline overlay — fixed so it always covers */
 body::before {
   content: "";
-  position: absolute;
+  position: fixed;  /* fixed so it doesn't move */
   top: 0; left: 0; right: 0; bottom: 0;
   background: repeating-linear-gradient(
     to bottom,
@@ -177,18 +183,18 @@ body::before {
     transparent 4px
   );
   pointer-events: none;
-  z-index: 2;
+  z-index: 9998;
 }
 
-/* Screen flicker effect */
+/* Flicker overlay — fixed too */
 body::after {
   content: "";
-  position: absolute;
+  position: fixed; /* fixed */
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0, 0, 0, 0.2);
   animation: flicker 0.15s infinite;
   pointer-events: none;
-  z-index: 3;
+  z-index: 9999;
 }
 
 @keyframes flicker {
