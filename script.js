@@ -72,7 +72,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     }, 1200);
 
     // First typed message
-    const message = `Welcome operative ${username}.\nEncrypted message as follows...\n\nDECRYPTING...DECRYPTING...DECRYPTING...\n\nDECRYPTED!\n\n\n`;
+    const message = `Welcome operative ${username.toUpperCase()}.\nEncrypted message as follows...\n\nDECRYPTING...DECRYPTING...DECRYPTING...\n\nDECRYPTED!\n\n\n`;
 
     const typedTextElement = document.getElementById("typed-text");
 
