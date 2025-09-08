@@ -75,6 +75,12 @@ button:hover {
   top: 15vh;
   left: 50%;
   transform: translateX(-50%);
+  opacity: 0;                /* hidden at first */
+  transition: opacity 4s ease;
+}
+
+#secure-screen h2.alien-title.show {
+  opacity: 1;                /* fades in when .show is applied */
 }
 
 #secure-screen img.logo {
@@ -83,7 +89,7 @@ button:hover {
   max-width: 300px;
   filter: drop-shadow(0 0 12px #00ff88);
   opacity: 0;                  /* hidden at first */
-  transition: opacity 3.5s ease;
+  transition: opacity 4s ease;
 }
 
 #secure-screen img.logo.show {

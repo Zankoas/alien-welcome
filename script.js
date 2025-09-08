@@ -63,18 +63,25 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
       beep.play();
     }
 
-    // Fade in the logo after ACCESS GRANTED appears
-    setTimeout(() => {
-      const logo = document.querySelector("#secure-screen img.logo");
-      if (logo) {
-        logo.classList.add("show");
-      }
-    }, 1200);
-
-    // Reference typed text element
+    // Fade ins
+    const accessGranted = document.querySelector("#secure-screen h2.alien-title");
+    const logo = document.querySelector("#secure-screen img.logo");
     const typedTextElement = document.getElementById("typed-text");
 
-    // Multi-part intro messages
+    // Step 1: fade in logo
+    setTimeout(() => {
+      if (logo) logo.classList.add("show");
+    }, 500);
+
+    // Step 2: pause, then fade in ACCESS GRANTED
+    setTimeout(() => {
+      if (accessGranted) accessGranted.classList.add("show");
+    }, 4000);
+
+    // Step 3: pause again, then start typing text
+    setTimeout(() => {
+
+      // Multi-part intro messages
     const messages = [
       { text: `Welcome operative`, speed: 50 },
       { text: ` ${username.toUpperCase()}.`, speed: 800 },
@@ -106,6 +113,8 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
     // Start multi-part intro typing
     typeMessages();
+
+  }, 8000); // start typing after ACCESS GRANTED
 
   } else {
     errorEl.textContent = "ACCESS DENIED";
