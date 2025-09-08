@@ -8,7 +8,7 @@ async function checkCredentials(username, password) {
 
   for (let line of lines) {
     const [user, pass] = line.split(":");
-    if (user === username && pass === password) {
+    if (user.toLowerCase() === username.toLowerCase() && pass === password) {
       return true;
     }
   }
