@@ -119,7 +119,11 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
           // Reveal button group after final message
           const group = document.getElementById("button-group");
           group.style.display = "flex";
-          setTimeout(() => group.classList.add("show"), 2000);
+          setTimeout(() => {
+            group.classList.add("show");
+            // Smooth scroll to ensure buttons are visible
+            group.scrollIntoView({ behavior: "smooth", block: "end" });
+          }, 500);
         }, true);
       }, true);
     }
