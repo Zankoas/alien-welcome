@@ -104,10 +104,13 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     async function startMission() {
       const missionData = await fetchMissionData();
       typewriter("\n" + missionData, typedTextElement, 5, () => {
-        // Reveal button group after mission data
-        const group = document.getElementById("button-group");
-        group.style.display = "flex";
-        setTimeout(() => group.classList.add("show"), 1500);
+        // After mission data finishes, type final message
+        typewriter(`\n\n> END OF MESSAGE`, typedTextElement, 150, () => {
+          // Reveal button group after final message
+          const group = document.getElementById("button-group");
+          group.style.display = "flex";
+          setTimeout(() => group.classList.add("show"), 2000);
+        }, true);
       }, true);
     }
 
