@@ -63,6 +63,14 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
       beep.play();
     }
 
+    // Fade in the logo after ACCESS GRANTED appears
+    setTimeout(() => {
+      const logo = document.querySelector("#secure-screen img.logo");
+      if (logo) {
+        logo.classList.add("show");
+      }
+    }, 1200);
+
     // First typed message
     const message = `Welcome, operative ${username}.
 Classified mission data follows...\n`;

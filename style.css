@@ -8,29 +8,6 @@ body {
   position: relative;
 }
 
-/* Wrap content so CRT curvature applies */
-#crt-wrapper {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  /* Dramatic CRT curvature */
-  transform: perspective(900px) rotateX(4deg) rotateY(-6deg);
-  animation: crt-warp 8s ease-in-out infinite;
-}
-
-@keyframes crt-warp {
-  0%, 100% {
-    transform: perspective(900px) rotateX(4deg) rotateY(-6deg);
-  }
-  50% {
-    transform: perspective(900px) rotateX(6deg) rotateY(-8deg);
-  }
-}
-
 /* Glow */
 .alien-title, #typed-text, input, button, a {
   text-shadow: 0 0 8px #00ff88, 0 0 16px #00ff88;
@@ -89,7 +66,29 @@ button:hover {
 
 /* Access granted screen */
 #secure-screen {
-  text-align: center; /* center ACCESS GRANTED heading */
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+#secure-screen h2.alien-title {
+  position: absolute;
+  top: 15vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#secure-screen img.logo {
+  display: block;
+  margin: 5vh auto 0 auto;
+  max-width: 200px;
+  filter: drop-shadow(0 0 12px #00ff88);
+  opacity: 0;                  /* hidden at first */
+  transition: opacity 3.5s ease;
+}
+
+#secure-screen img.logo.show {
+  opacity: 1;                  /* fades in when .show is applied */
 }
 
 /* Main text box */
@@ -98,8 +97,6 @@ button:hover {
   margin-top: 20vh;       /* start 20% down the screen */
   white-space: pre-line;
   width: 50%;
-  height: 300px;
-  overflow-y: auto;
   padding: 10px;
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.85);
@@ -107,6 +104,8 @@ button:hover {
   text-align: left;
   margin-left: auto;
   margin-right: auto;
+  overflow: visible;     /* no inner scroll */
+  height: auto;          /* let it expand */
 }
 
 /* Mobile: full width */
