@@ -15,6 +15,14 @@ async function checkCredentials(username, password) {
   return false;
 }
 
+// Auto-scroll helper
+function autoScroll() {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
+  });
+}
+
 // Typewriter function with append support
 function typewriter(text, element, speed = 50, callback = null, append = false) {
   let i = 0;
@@ -23,10 +31,12 @@ function typewriter(text, element, speed = 50, callback = null, append = false) 
   function typing() {
     if (i < text.length) {
       element.innerHTML = existing + text.substring(0, i + 1) + '<span class="cursor"></span>';
+      autoScroll();
       i++;
       setTimeout(typing, speed);
     } else {
       element.innerHTML = existing + text + '<span class="cursor"></span>';
+      autoScroll();
       if (callback) callback();
     }
   }
