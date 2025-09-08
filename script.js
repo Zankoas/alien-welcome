@@ -35,7 +35,7 @@ function typewriter(text, element, speed = 50, callback = null, append = false) 
 
 // Load mission text file
 async function fetchMissionData() {
-  const response = await fetch("mission.txt"); // make sure mission.txt exists in root
+  const response = await fetch("mission.txt");
   return await response.text();
 }
 
@@ -77,7 +77,7 @@ Classified mission data follows...\n`;
         const group = document.getElementById("button-group");
         group.style.display = "flex";
         setTimeout(() => group.classList.add("show"), 100);
-      }, true); // append mission data
+      }, true);
     });
   } else {
     errorEl.textContent = "ACCESS DENIED";
@@ -104,16 +104,17 @@ document.getElementById("password").addEventListener("input", () => {
   errorEl.textContent = "";
 });
 
+// Beep + delay on link clicks
 document.querySelectorAll(".button-group a").forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
     const beep = document.getElementById("beep-sound");
     if (beep) {
-      beep.currentTime = 0; // restart if already playing
+      beep.currentTime = 0;
       beep.play();
     }
     setTimeout(() => {
       window.open(link.href, "_blank");
-    }, 400); // delay before opening
+    }, 400);
   });
 });
