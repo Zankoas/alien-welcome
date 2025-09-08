@@ -72,19 +72,18 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     }, 1200);
 
     // First typed message
-    const message = `Welcome, operative ${username}.
-Classified mission data follows...\n`;
+    const message = `Welcome operative ${username}.\nEncrypted message as follows...\n\nDECRYPTING...DECRYPTING...DECRYPTING...\n\nDECRYPTED!\n\n\n`;
 
     const typedTextElement = document.getElementById("typed-text");
 
-    typewriter(message, typedTextElement, 100, async () => {
+    typewriter(message, typedTextElement, 25, async () => {
       // Fetch mission.txt and append it
       const missionData = await fetchMissionData();
-      typewriter("\n" + missionData, typedTextElement, 1, () => {
+      typewriter("\n" + missionData, typedTextElement, 5, () => {
         // Reveal button group after mission data
         const group = document.getElementById("button-group");
         group.style.display = "flex";
-        setTimeout(() => group.classList.add("show"), 1000);
+        setTimeout(() => group.classList.add("show"), 1500);
       }, true);
     });
   } else {
