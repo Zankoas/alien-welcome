@@ -4,7 +4,6 @@ body {
   font-family: "Courier New", monospace;
   height: 100vh;
   margin: 0;
-  overflow: hidden;
   position: relative;
 }
 
@@ -81,7 +80,7 @@ button:hover {
 #secure-screen img.logo {
   display: block;
   margin: 5vh auto 0 auto;
-  max-width: 200px;
+  max-width: 300px;
   filter: drop-shadow(0 0 12px #00ff88);
   opacity: 0;                  /* hidden at first */
   transition: opacity 3.5s ease;
@@ -169,10 +168,10 @@ button:hover {
   50% { opacity: 0; }
 }
 
-/* CRT scanline overlay — fixed so it always covers */
+/* CRT scanline overlay */
 body::before {
   content: "";
-  position: fixed;  /* fixed so it doesn't move */
+  position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: repeating-linear-gradient(
     to bottom,
@@ -185,10 +184,10 @@ body::before {
   z-index: 9998;
 }
 
-/* Flicker overlay — fixed too */
+/* Flicker overlay */
 body::after {
   content: "";
-  position: fixed; /* fixed */
+  position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0, 0, 0, 0.2);
   animation: flicker 0.15s infinite;
@@ -198,6 +197,6 @@ body::after {
 
 @keyframes flicker {
   0%, 100% { opacity: 0.1; }
-  30% { opacity: 0.35; }
-  60% { opacity: 0.5; }
+  30% { opacity: 0.2; }
+  60% { opacity: 0.3; }
 }
