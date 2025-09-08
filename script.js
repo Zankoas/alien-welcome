@@ -103,3 +103,17 @@ document.getElementById("password").addEventListener("input", () => {
   errorEl.classList.remove("flash-error");
   errorEl.textContent = "";
 });
+
+document.querySelectorAll(".button-group a").forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const beep = document.getElementById("beep-sound");
+    if (beep) {
+      beep.currentTime = 0; // restart if already playing
+      beep.play();
+    }
+    setTimeout(() => {
+      window.open(link.href, "_blank");
+    }, 400); // delay before opening
+  });
+});
