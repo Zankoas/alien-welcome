@@ -78,6 +78,15 @@ button:hover {
   transform: scale(1);
 }
 
+@keyframes crt-warp {
+  0%, 100% {
+    transform: perspective(1000px) rotateX(1deg) rotateY(-2deg);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(1.5deg) rotateY(-2.5deg);
+  }
+}
+
 #typed-text {
   font-size: 1.1em;
   margin-top: 10px;
@@ -89,6 +98,9 @@ button:hover {
   border: 1px solid #00ff88;
   padding: 10px;
   box-sizing: border-box;
+  /* CRT curvature */
+  transform: perspective(1000px) rotateX(1deg) rotateY(-2deg);
+  animation: crt-warp 6s ease-in-out infinite;
 }
 
 .cursor {
