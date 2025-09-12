@@ -102,7 +102,7 @@ button:hover {
 #typed-text {
   font-size: 1.1em;
   margin-top: 20vh;       /* start 20% down the screen */
-  margin-bottom: 10vh;    /* give breathing space at bottom */
+  margin-bottom: 0vh;
   white-space: pre-line;
   width: 50%;
   padding: 10px;
@@ -136,14 +136,25 @@ button:hover {
   50% { background-color: transparent; }
 }
 
+/* Blank reserved box below the text */
+#button-box {
+  margin-top: 0;
+  margin-bottom: 3vh;
+  height: 300px;              /* fixed reserved space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 /* Links stacked vertically */
 .button-group {
-  margin-top: 30px;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
   align-items: center;
-  padding-bottom: 10vh;
+  padding-bottom: 0;
 }
 
 .button-group a {

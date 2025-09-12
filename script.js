@@ -126,7 +126,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
           setTimeout(() => {
             group.classList.add("show");
             // Smooth scroll to ensure buttons are visible
-            group.scrollIntoView({ behavior: "smooth", block: "end" });
+            group.scrollIntoView({ behavior: "smooth", block: "center" });
           }, specialUser ? waitTime : 500);
         }, true);
       }, true);
