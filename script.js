@@ -44,7 +44,7 @@ function typewriter(text, element, speed = 50, callback = null, append = false) 
 }
 
 const documents = {
-  "--- USCM CLASSIFIED BRIEFING: OPERATION ICARUS ---": "operation_icarus.txt"
+  "> --- USCM CLASSIFIED BRIEFING: OPERATION ICARUS ---": "operation_icarus.txt"
 };
 let selectedDoc = "mission.txt";
 
