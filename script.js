@@ -43,6 +43,11 @@ function typewriter(text, element, speed = 50, callback = null, append = false) 
   typing();
 }
 
+const documents = {
+  "--- USCM CLASSIFIED BRIEFING: OPERATION ICARUS ---": "operation_icarus.txt"
+};
+let selectedDoc = "mission.txt";
+
 // Load mission text file
 async function fetchMissionData() {
   const response = await fetch("mission.txt");
@@ -100,15 +105,35 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
       { text: `Welcome operative`, speed: specialUser ? typeSpeed : 50 },
       { text: ` ${username.toUpperCase()}.`, speed: specialUser ? typeSpeed : 800 },
       { text: `\nClassified message received...`, speed: specialUser ? typeSpeed : 50 },
+      { text: "__DOC_SELECTOR__", speed: 0 }, // doc selector box
       { text: `\n\n> DECRYPTING...\n> DECRYPTING...\n> DECRYPTING...`, speed: specialUser ? typeSpeed : 200 },
       { text: `\n\n> DECRYPTED\n\n`, speed: specialUser ? typeSpeed : 50 }
     ];
 
     function typeMessages(index = 0) {
       if (index < messages.length) {
-        typewriter(messages[index].text, typedTextElement, messages[index].speed, () => {
-          typeMessages(index + 1);
-        }, true);
+        if (messages[index].text === "__DOC_SELECTOR__") {
+          // Show the selector box
+          const selector = document.getElementById("doc-selector");
+          selector.innerHTML = ""; // clear previous
+          selector.style.display = "flex";
+        
+          // Add one button per doc
+          for (const [label, file] of Object.entries(documents)) {
+            const btn = document.createElement("button");
+            btn.textContent = label;
+            btn.addEventListener("click", () => {
+              selectedDoc = file;
+              selector.style.display = "none";
+              typeMessages(index + 1); // continue typing
+            });
+            selector.appendChild(btn);
+          }
+        } else {
+          typewriter(messages[index].text, typedTextElement, messages[index].speed, () => {
+            typeMessages(index + 1);
+          }, true);
+        }
       } else {
         // Pause before mission
         setTimeout(startMission, specialUser ? waitTime : 1500);
@@ -116,7 +141,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     }
 
     async function startMission() {
-      const missionData = await fetchMissionData();
+      const missionData = await (await fetch(selectedDoc)).text();
       typewriter("\n" + missionData, typedTextElement, specialUser ? typeSpeed : 25, () => {
         // After mission data finishes, type final message
         typewriter(`\n\n> END OF MESSAGE`, typedTextElement, specialUser ? typeSpeed : 200, () => {

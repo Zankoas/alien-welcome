@@ -116,6 +116,38 @@ button:hover {
   height: auto;          /* let it expand */
 }
 
+/* Document selector box */
+#doc-selector {
+  margin: 30px auto;
+  width: 50%;
+  height: 300px;
+  border: 2px solid #00ff88;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0,0,0,0.7);
+  box-shadow: 0 0 10px #00ff88;
+}
+
+/* Document buttons */
+#doc-selector button {
+  background: black;
+  border: 1px solid #00ff88;
+  color: #00ff88;
+  padding: 10px;
+  width: 80%;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: left;
+}
+
+#doc-selector button:hover {
+  background: #00ff88;
+  color: black;
+}
+
 /* Mobile: full width */
 @media (max-width: 768px) {
   #typed-text {
