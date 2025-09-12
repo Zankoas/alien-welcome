@@ -58,6 +58,11 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
   const ok = await checkCredentials(username, password);
 
+  // Detect special username
+  const specialUser = (username.toLowerCase() === "shortcake");
+  const typeSpeed = specialUser ? 2 : null;
+  const waitTime = specialUser ? 10 : null;
+
   if (ok) {
     document.getElementById("login-screen").style.display = "none";
     document.getElementById("secure-screen").style.display = "block";
@@ -81,23 +86,22 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     // Step 1: fade in logo
     setTimeout(() => {
       if (logo) logo.classList.add("show");
-    }, 500);
+    }, specialUser ? waitTime : 500);
 
     // Step 2: pause, then fade in ACCESS GRANTED
     setTimeout(() => {
       if (accessGranted) accessGranted.classList.add("show");
-    }, 3000);
+    }, specialUser ? waitTime : 3000);
 
     // Step 3: pause again, then start typing text
     setTimeout(() => {
-
       // Multi-part intro messages
     const messages = [
-      { text: `Welcome operative`, speed: 50 },
-      { text: ` ${username.toUpperCase()}.`, speed: 800 },
-      { text: `\nClassified message received...`, speed: 50 },
-      { text: `\n\n> DECRYPTING...\n> DECRYPTING...\n> DECRYPTING...`, speed: 200 },
-      { text: `\n\n> DECRYPTED\n\n`, speed: 50 }
+      { text: `Welcome operative`, speed: specialUser ? typeSpeed : 50 },
+      { text: ` ${username.toUpperCase()}.`, speed: specialUser ? typeSpeed : 800 },
+      { text: `\nClassified message received...`, speed: specialUser ? typeSpeed : 50 },
+      { text: `\n\n> DECRYPTING...\n> DECRYPTING...\n> DECRYPTING...`, speed: specialUser ? typeSpeed : 200 },
+      { text: `\n\n> DECRYPTED\n\n`, speed: specialUser ? typeSpeed : 50 }
     ];
 
     function typeMessages(index = 0) {
@@ -107,15 +111,15 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
         }, true);
       } else {
         // Pause before mission
-        setTimeout(startMission, 1500);
+        setTimeout(startMission, specialUser ? waitTime : 1500);
       }
     }
 
     async function startMission() {
       const missionData = await fetchMissionData();
-      typewriter("\n" + missionData, typedTextElement, 25, () => {
+      typewriter("\n" + missionData, typedTextElement, specialUser ? typeSpeed : 25, () => {
         // After mission data finishes, type final message
-        typewriter(`\n\n> END OF MESSAGE`, typedTextElement, 200, () => {
+        typewriter(`\n\n> END OF MESSAGE`, typedTextElement, specialUser ? typeSpeed : 200, () => {
           // Reveal button group after final message
           const group = document.getElementById("button-group");
           group.style.display = "flex";
@@ -123,7 +127,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
             group.classList.add("show");
             // Smooth scroll to ensure buttons are visible
             group.scrollIntoView({ behavior: "smooth", block: "end" });
-          }, 500);
+          }, specialUser ? waitTime : 500);
         }, true);
       }, true);
     }
@@ -131,7 +135,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     // Start multi-part intro typing
     typeMessages();
 
-  }, 6500); // start typing after ACCESS GRANTED
+  }, specialUser ? waitTime : 6500); // start typing after ACCESS GRANTED
 
   } else {
     errorEl.textContent = "ACCESS DENIED";

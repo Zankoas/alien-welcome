@@ -1,4 +1,5 @@
 cake:cake
+shortcake:cake
 steel:Z@qRAV6AZ^TTbA7
 cutter:&*KLPm3ga6FN%s#
 grim:V9bb5fFY*@ZSCtM
