@@ -131,6 +131,12 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
               }
               // Show #button-box
               document.getElementById("button-box").classList.add("show");
+              // Clear any previous mission text
+              typedText2.innerHTML = "";
+              // Hide action buttons again if they were shown
+              const group = document.getElementById("button-group");
+              group.style.display = "none";
+              group.classList.remove("show");
               // Reveal second text box
               typedText2.style.display = "block";
               // Continue typing into second box
