@@ -125,6 +125,12 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
             btn.addEventListener("click", () => {
               selectedDoc = file;
               selector.style.display = "none";
+              // Play beep sound when a mission briefing is selected
+              const beep = document.getElementById("beep-sound");
+              if (beep) {
+                beep.currentTime = 0;
+                beep.play();
+              }
               // Show #button-box
               document.getElementById("button-box").classList.add("show");
               typeMessages(index + 1); // continue typing
