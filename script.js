@@ -105,7 +105,11 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     const messages = [
       { text: `Welcome operative`, speed: specialUser ? typeSpeed : 50, target: typedText1 },
       { text: ` ${username.toUpperCase()}.`, speed: specialUser ? typeSpeed : 800, target: typedText1 },
-      { text: `\nClassified message received...`, speed: specialUser ? typeSpeed : 50, target: typedText1 },
+      { 
+        text: `\nClassified message${Object.keys(documents).length > 1 ? "s" : ""} received...`, 
+        speed: specialUser ? typeSpeed : 50, 
+        target: typedText1 
+      },
       { text: "__DOC_SELECTOR__", speed: 0 }
     ];
 
