@@ -98,8 +98,8 @@ button:hover {
   opacity: 1;                  /* fades in when .show is applied */
 }
 
-/* Main text box */
-#typed-text {
+#typed-text-1,
+#typed-text-2 {
   font-size: 1.1em;
   margin-top: 20vh;       /* start 20% down the screen */
   margin-bottom: 0vh;
@@ -114,6 +114,10 @@ button:hover {
   margin-right: auto;
   overflow: visible;     /* no inner scroll */
   height: auto;          /* let it expand */
+}
+
+#typed-text-2 {
+  margin-top: 0px;   /* spacing below selector */
 }
 
 /* Document selector box */

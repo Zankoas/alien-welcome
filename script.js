@@ -86,7 +86,8 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     // Fade ins
     const accessGranted = document.querySelector("#secure-screen h2.alien-title");
     const logo = document.querySelector("#secure-screen img.logo");
-    const typedTextElement = document.getElementById("typed-text");
+    const typedText1 = document.getElementById("typed-text-1");
+    const typedText2 = document.getElementById("typed-text-2");
 
     // Step 1: fade in logo
     setTimeout(() => {
@@ -102,12 +103,10 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     setTimeout(() => {
       // Multi-part intro messages
     const messages = [
-      { text: `Welcome operative`, speed: specialUser ? typeSpeed : 50 },
-      { text: ` ${username.toUpperCase()}.`, speed: specialUser ? typeSpeed : 800 },
-      { text: `\nClassified message received...`, speed: specialUser ? typeSpeed : 50 },
-      { text: "__DOC_SELECTOR__", speed: 0 }, // doc selector box
-      { text: `\n\n> DECRYPTING...\n> DECRYPTING...\n> DECRYPTING...`, speed: specialUser ? typeSpeed : 200 },
-      { text: `\n\n> DECRYPTED\n\n`, speed: specialUser ? typeSpeed : 50 }
+      { text: `Welcome operative`, speed: specialUser ? typeSpeed : 50, target: typedText1 },
+      { text: ` ${username.toUpperCase()}.`, speed: specialUser ? typeSpeed : 800, target: typedText1 },
+      { text: `\nClassified message received...`, speed: specialUser ? typeSpeed : 50, target: typedText1 },
+      { text: "__DOC_SELECTOR__", speed: 0 }
     ];
 
     function typeMessages(index = 0) {
@@ -124,7 +123,6 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
             btn.textContent = label;
             btn.addEventListener("click", () => {
               selectedDoc = file;
-              selector.style.display = "none";
               // Play beep sound when a mission briefing is selected
               const beep = document.getElementById("beep-sound");
               if (beep) {
@@ -133,26 +131,35 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
               }
               // Show #button-box
               document.getElementById("button-box").classList.add("show");
-              typeMessages(index + 1); // continue typing
+              // Reveal second text box
+              typedText2.style.display = "block";
+              // Continue typing into second box
+              typewriter(`> DECRYPTING...\n> DECRYPTING...\n> DECRYPTING...`,
+                typedText2,
+                specialUser ? typeSpeed : 200,
+                () => {
+                  typewriter(`\n\n> DECRYPTED\n\n`, typedText2, specialUser ? typeSpeed : 50, () => {
+                    setTimeout(startMission, specialUser ? waitTime : 1500);
+                  }, true);
+                },
+                true
+              );
             });
             selector.appendChild(btn);
           }
         } else {
-          typewriter(messages[index].text, typedTextElement, messages[index].speed, () => {
+          typewriter(messages[index].text, messages[index].target, messages[index].speed, () => {
             typeMessages(index + 1);
           }, true);
         }
-      } else {
-        // Pause before mission
-        setTimeout(startMission, specialUser ? waitTime : 1500);
       }
     }
 
     async function startMission() {
       const missionData = await (await fetch(selectedDoc)).text();
-      typewriter("\n" + missionData, typedTextElement, specialUser ? typeSpeed : 25, () => {
+      typewriter("\n" + missionData, typedText2, specialUser ? typeSpeed : 25, () => {
         // After mission data finishes, type final message
-        typewriter(`\n\n> END OF MESSAGE`, typedTextElement, specialUser ? typeSpeed : 200, () => {
+        typewriter(`\n\n> END OF MESSAGE`, typedText2, specialUser ? typeSpeed : 200, () => {
           // Reveal button group after final message
           const group = document.getElementById("button-group");
           group.style.display = "flex";
