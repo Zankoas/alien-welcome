@@ -211,6 +211,18 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
               link.style.transition = "opacity 1s ease, transform 0.5s ease";
               link.style.opacity = "1";
               link.style.transform = "scale(1)";
+              // Add beep + delay on click for each button
+              link.addEventListener("click", function(e) {
+                e.preventDefault();
+                const beep = document.getElementById("beep-sound");
+                if (beep) {
+                  beep.currentTime = 0;
+                  beep.play();
+                }
+                setTimeout(() => {
+                  window.open(link.href, "_blank");
+                }, (specialUser ? waitTime : 100));
+              });
             }, (specialUser ? waitTime : i * 1250));
           });
             group.classList.add("show");
