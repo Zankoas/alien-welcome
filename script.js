@@ -161,12 +161,12 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
               link.style.transition = "opacity 1s ease, transform 0.5s ease";
               link.style.opacity = "1";
               link.style.transform = "scale(1)";
-            }, (specialUser ? waitTime : 500) + i * 400);
+            }, (specialUser ? waitTime : i * 1250));
           });
           setTimeout(() => {
             group.classList.add("show");
             group.scrollIntoView({ behavior: "smooth", block: "center" });
-          }, (specialUser ? waitTime : 500) + links.length * 400);
+          }, (specialUser ? waitTime : 5000));
         }, true);
       }, true);
     }
