@@ -150,11 +150,23 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
           // Reveal button group after final message
           const group = document.getElementById("button-group");
           group.style.display = "flex";
+          // Fade in each button one after another
+          const links = Array.from(group.querySelectorAll("a"));
+          links.forEach(link => {
+            link.style.opacity = "0";
+            link.style.transform = "scale(0.9)";
+          });
+          links.forEach((link, i) => {
+            setTimeout(() => {
+              link.style.transition = "opacity 1s ease, transform 0.5s ease";
+              link.style.opacity = "1";
+              link.style.transform = "scale(1)";
+            }, (specialUser ? waitTime : 500) + i * 400);
+          });
           setTimeout(() => {
             group.classList.add("show");
-            // Smooth scroll to ensure buttons are visible
             group.scrollIntoView({ behavior: "smooth", block: "center" });
-          }, specialUser ? waitTime : 500);
+          }, (specialUser ? waitTime : 500) + links.length * 400);
         }, true);
       }, true);
     }
