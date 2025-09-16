@@ -145,7 +145,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
                 specialUser ? typeSpeed : 200,
                 () => {
                   typewriter(`\n\n> DECRYPTED\n\n`, typedText2, specialUser ? typeSpeed : 50, () => {
-                    setTimeout(startMission, specialUser ? waitTime : 1500);
+                    setTimeout(startMission, specialUser ? waitTime : 750);
                   }, true);
                 },
                 true
@@ -227,7 +227,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
           });
             group.classList.add("show");
             group.scrollIntoView({ behavior: "smooth", block: "center" });
-          }, (specialUser ? waitTime : 1250));
+          }, (specialUser ? waitTime : 750));
         }, true);
       }, true);
     }
