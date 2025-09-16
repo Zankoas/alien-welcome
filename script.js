@@ -165,10 +165,32 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
       const missionData = await (await fetch(selectedDoc)).text();
       typewriter("\n" + missionData, typedText2, specialUser ? typeSpeed : 25, () => {
         // After mission data finishes, type final message
-        typewriter(`\n\n> END OF MESSAGE`, typedText2, specialUser ? typeSpeed : 200, () => {
+        typewriter(`\n\n> END OF MESSAGE`, typedText2, specialUser ? typeSpeed : 200, async () => {
           // Reveal button group after final message
           const group = document.getElementById("button-group");
+          group.innerHTML = ""; 
           group.style.display = "flex";
+          // Fetch the per-mission button file
+          const buttonFile = selectedDoc.replace(".txt", "_buttons.txt");
+          try {
+            const resp = await fetch(buttonFile);
+            const text = await resp.text();
+          
+            // Each line format: label:url
+            const lines = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+            lines.forEach(line => {
+              const [label, url] = line.split(":");
+              if (label && url) {
+                const a = document.createElement("a");
+                a.href = url.trim();
+                a.textContent = label.trim();
+                a.target = "_blank";
+                group.appendChild(a);
+              }
+            });
+          } catch (err) {
+            console.error("Could not load button file", buttonFile, err);
+          }
           // Fade in each button one after another
           setTimeout(() => {
           const links = Array.from(group.querySelectorAll("a"));
