@@ -125,6 +125,8 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
             btn.addEventListener("click", () => {
               selectedDoc = file;
               selector.style.display = "none";
+              // Show #button-box
+              document.getElementById("button-box").classList.add("show");
               typeMessages(index + 1); // continue typing
             });
             selector.appendChild(btn);

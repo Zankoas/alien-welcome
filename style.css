@@ -174,11 +174,16 @@ button:hover {
 #button-box {
   margin-top: 0;
   margin-bottom: 3vh;
-  height: 300px;              /* fixed reserved space */
+  height: 0; /* hidden by default */
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+}
+
+/* Show #button-box and restore height when .show is added */
+#button-box.show {
+  height: 300px;
 }
 
 /* Links stacked vertically */
