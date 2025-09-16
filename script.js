@@ -176,14 +176,22 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
             const resp = await fetch(buttonFile);
             const text = await resp.text();
           
-            // Each line format: label:url
+            // Each line format: label:url  (but URL may contain ":" so only split at the first one)
             const lines = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
             lines.forEach(line => {
-              const [label, url] = line.split(":");
+              // ignore comment lines
+              if (line.startsWith("#")) return;
+            
+              const idx = line.indexOf(":");
+              if (idx === -1) return; // malformed line, skip
+            
+              const label = line.slice(0, idx).trim();
+              const url = line.slice(idx + 1).trim();
+            
               if (label && url) {
                 const a = document.createElement("a");
-                a.href = url.trim();
-                a.textContent = label.trim();
+                a.href = url;
+                a.textContent = label;
                 a.target = "_blank";
                 group.appendChild(a);
               }
