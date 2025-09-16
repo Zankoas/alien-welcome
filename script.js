@@ -65,7 +65,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
   // Detect special username
   const specialUser = (username.toLowerCase() === "shortcake");
-  const typeSpeed = specialUser ? 2 : null;
+  const typeSpeed = specialUser ? 1 : null;
   const waitTime = specialUser ? 10 : null;
 
   if (ok) {
