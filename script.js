@@ -151,6 +151,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
           const group = document.getElementById("button-group");
           group.style.display = "flex";
           // Fade in each button one after another
+          setTimeout(() => {
           const links = Array.from(group.querySelectorAll("a"));
           links.forEach(link => {
             link.style.opacity = "0";
@@ -163,10 +164,9 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
               link.style.transform = "scale(1)";
             }, (specialUser ? waitTime : i * 1250));
           });
-          setTimeout(() => {
             group.classList.add("show");
             group.scrollIntoView({ behavior: "smooth", block: "center" });
-          }, (specialUser ? waitTime : 5000));
+          }, (specialUser ? waitTime : 1250));
         }, true);
       }, true);
     }
