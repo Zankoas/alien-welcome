@@ -74,7 +74,7 @@ button:hover {
 
 #secure-screen h2.alien-title {
   position: absolute;
-  top: 250px;
+  top: calc(110px + 14vh);
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;                /* hidden at first */
@@ -87,7 +87,7 @@ button:hover {
 
 #secure-screen img.logo {
   display: block;
-  margin: 50px auto 0 auto;
+  margin: calc(10px + 5vh) auto 0 auto;
   max-width: 300px;
   filter: drop-shadow(0 0 12px #00ff88);
   opacity: 0;                  /* hidden at first */
@@ -101,7 +101,7 @@ button:hover {
 #typed-text-1,
 #typed-text-2 {
   font-size: 1.1em;
-  margin-top: 200px;
+  margin-top: 17vh;
   margin-bottom: 0px;
   white-space: pre-line;
   width: 50%;
