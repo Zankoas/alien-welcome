@@ -137,6 +137,36 @@ button:hover {
   box-sizing: border-box;
 }
 
+/* Responsive width for #typed-text-1 */
+@media (max-width: 1600px) {
+  #typed-text-1,
+  #typed-text-2,
+  #doc-selector {
+    width: 60%;
+  }
+}
+@media (max-width: 1300px) {
+  #typed-text-1,
+  #typed-text-2,
+  #doc-selector {
+    width: 70%;
+  }
+}
+@media (max-width: 1000px) {
+  #typed-text-1,
+  #typed-text-2,
+  #doc-selector {
+    width: 80%;
+  }
+}
+@media (max-width: 700px) {
+  #typed-text-1,
+  #typed-text-2,
+  #doc-selector {
+    width: 90%;
+  }
+}
+
 /* Document buttons */
 #doc-selector button {
   background: black;
