@@ -79,6 +79,7 @@ button:hover {
   transform: translateX(-50%);
   opacity: 0;                /* hidden at first */
   transition: opacity 4s ease;
+  white-space: nowrap;
 }
 
 #secure-screen h2.alien-title.show {
