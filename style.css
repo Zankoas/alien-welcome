@@ -185,6 +185,11 @@ button:hover {
   color: black;
 }
 
+#doc-selector button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
 /* Mobile: full width */
 @media (max-width: 768px) {
   #typed-text {

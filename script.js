@@ -126,6 +126,10 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
             const btn = document.createElement("button");
             btn.textContent = label;
             btn.addEventListener("click", () => {
+              // Disable to prevent re-selecting
+              const allButtons = document.querySelectorAll("#doc-selector button");
+              allButtons.forEach(b => b.disabled = true);
+              // Set document to file
               selectedDoc = file;
               // Play beep sound when a mission briefing is selected
               const beep = document.getElementById("beep-sound");
@@ -231,6 +235,9 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
           });
             group.classList.add("show");
             group.scrollIntoView({ behavior: "smooth", block: "center" });
+            // Re-enable mission selector buttons
+            const allButtons = document.querySelectorAll("#doc-selector button");
+            allButtons.forEach(b => b.disabled = false);
           }, (specialUser ? waitTime : 750));
         }, true);
       }, true);
