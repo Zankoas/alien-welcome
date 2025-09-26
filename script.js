@@ -148,11 +148,11 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
               // Reveal second text box
               typedText2.style.display = "block";
               // Continue typing into second box
-              typewriter(`> DECRYPTING...\n> DECRYPTING...\n> DECRYPTING...`,
+              typewriter(`> DECRYPTING...............`, // old text: typewriter(`> DECRYPTING...\n> DECRYPTING...\n> DECRYPTING...`,
                 typedText2,
-                specialUser ? typeSpeed : 200,
+                specialUser ? typeSpeed : 300,
                 () => {
-                  typewriter(`\n\n> DECRYPTED\n\n`, typedText2, specialUser ? typeSpeed : 50, () => {
+                  typewriter(`\n> DECRYPTED\n\n`, typedText2, specialUser ? typeSpeed : 50, () => {
                     setTimeout(startMission, specialUser ? waitTime : 750);
                   }, true);
                 },
