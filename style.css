@@ -136,6 +136,35 @@ button:hover {
   background: rgba(0,0,0,0.7);
   box-shadow: 0 0 10px #00ff88;
   box-sizing: border-box;
+
+  overflow-y: auto;   /* ✅ enable vertical scrollbar */
+  overflow-x: hidden; /* hide horizontal scrollbar */
+}
+
+/* Custom scrollbar styling for doc selector */
+#doc-selector::-webkit-scrollbar {
+  width: 10px;                    /* scrollbar width */
+}
+
+#doc-selector::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.6);  /* dark track */
+  border-radius: 5px;
+}
+
+#doc-selector::-webkit-scrollbar-thumb {
+  background: #00ff88;             /* neon green thumb */
+  border-radius: 5px;
+  box-shadow: 0 0 6px #00ff88;     /* glow effect */
+}
+
+#doc-selector::-webkit-scrollbar-thumb:hover {
+  background: #00cc66;             /* slightly darker on hover */
+}
+
+/* For Firefox */
+#doc-selector {
+  scrollbar-width: thin;
+  scrollbar-color: #00ff88 rgba(0,0,0,0.6);
 }
 
 /* Responsive width for #typed-text-1 */
@@ -299,4 +328,36 @@ body::after {
   0%, 100% { opacity: 0.1; }
   30% { opacity: 0.2; }
   60% { opacity: 0.3; }
+}
+
+/* ===== Global scrollbar styling (all scroll areas) ===== */
+::-webkit-scrollbar {
+  width: 10px;                    /* scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.6);  /* dark track */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff88;             /* neon green thumb */
+  border-radius: 5px;
+  box-shadow: 0 0 6px #00ff88;     /* glow effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00cc66;             /* slightly darker on hover */
+}
+
+/* Firefox global scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00ff88 rgba(0,0,0,0.6);
+}
+
+/* ===== Mission selector specific ===== */
+#doc-selector {
+  overflow-y: auto;   /* enable vertical scrolling */
+  overflow-x: hidden; /* hide horizontal */
 }
