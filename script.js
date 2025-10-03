@@ -44,7 +44,7 @@ function typewriter(text, element, speed = 50, callback = null, append = false) 
 }
 
 const documents = {
-  "> --- USCM CLASSIFIED BRIEFING: OPERATION ICARUS ---": "operation_icarus.txt",
+  "> --- CLASSIFICATION UNKNOWN: ASSIGNMENT ICARUS ---": "assignment_icarus.txt",
   "> --- USCM CLASSIFIED BRIEFING: OPERATION OCTOPUS GARDEN ---": "operation_octopus_garden.txt",
   "> --- USCM CLASSIFIED BRIEFING: OPERATION DEEP SHAFT ---": "operation_deep_shaft.txt",
   "> --- USCM CLASSIFIED BRIEFING: OPERATION DREAMCATCHER ---": "operation_dreamcatcher.txt",
