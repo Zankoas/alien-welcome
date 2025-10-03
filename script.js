@@ -186,89 +186,73 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
           const group = document.getElementById("button-group");
           group.innerHTML = ""; 
           group.style.display = "flex";
+        
           // Fetch the per-mission button file
           const buttonFile = selectedDoc.replace(".txt", "_buttons.txt");
           try {
             const resp = await fetch(buttonFile);
           
-            // If file not found or bad response, just skip buttons
-            if (!resp.ok) {
-              console.warn("No button file found for mission:", buttonFile);
-              return;
+            if (resp.ok) {
+              const text = (await resp.text()).trim();
+              if (text) {
+                const lines = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+                lines.forEach(line => {
+                  const idx = line.indexOf(":");
+                  if (idx === -1) return;
+                
+                  const label = line.slice(0, idx).trim();
+                  const url = line.slice(idx + 1).trim();
+                  if (!label || !url) return;
+                
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.textContent = label;
+                  a.target = "_blank";
+                
+                  // 🔊 Play beep on click
+                  a.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const beep = document.getElementById("beep-sound");
+                    if (beep) {
+                      beep.currentTime = 0;
+                      beep.play();
+                    }
+                    setTimeout(() => {
+                      window.open(url, "_blank");
+                    }, 400);
+                  });
+                
+                  group.appendChild(a);
+                });
+              }
             }
-          
-            const text = (await resp.text()).trim();
-            if (!text) {
-              console.warn("Button file is empty:", buttonFile);
-              return;
-            }
-          
-            // Each line format: label:url  (only split on first colon)
-            const lines = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
-            lines.forEach(line => {
-              const idx = line.indexOf(":");
-              if (idx === -1) return; // skip malformed lines
-            
-              const label = line.slice(0, idx).trim();
-              const url = line.slice(idx + 1).trim();
-              if (!label || !url) return;
-            
-              const a = document.createElement("a");
-              a.href = url;
-              a.textContent = label;
-              a.target = "_blank";
-            
-              // 🔊 Play beep before opening
-              a.addEventListener("click", (e) => {
-                e.preventDefault();
-                const beep = document.getElementById("beep-sound");
-                if (beep) {
-                  beep.currentTime = 0;
-                  beep.play();
-                }
-                setTimeout(() => {
-                  window.open(url, "_blank");
-                }, 400);
-              });
-            
-              group.appendChild(a);
-            });
-          
           } catch (err) {
-            console.error("Could not load button file", buttonFile, err);
+            console.warn("No button file found for mission:", buttonFile, err);
           }
-          // Fade in each button one after another
-          setTimeout(() => {
-          const links = Array.from(group.querySelectorAll("a"));
-          links.forEach(link => {
-            link.style.opacity = "0";
-            link.style.transform = "scale(0.9)";
-          });
-          links.forEach((link, i) => {
+        
+          // Always re-enable mission selector buttons
+          const allButtons = document.querySelectorAll("#doc-selector button");
+          allButtons.forEach(b => b.disabled = false);
+        
+          // Only animate action buttons if any exist
+          if (group.children.length > 0) {
             setTimeout(() => {
-              link.style.transition = "opacity 1s ease, transform 0.5s ease";
-              link.style.opacity = "1";
-              link.style.transform = "scale(1)";
-              // Add beep + delay on click for each button
-              link.addEventListener("click", function(e) {
-                e.preventDefault();
-                const beep = document.getElementById("beep-sound");
-                if (beep) {
-                  beep.currentTime = 0;
-                  beep.play();
-                }
-                setTimeout(() => {
-                  window.open(link.href, "_blank");
-                }, (specialUser ? waitTime : 100));
+              const links = Array.from(group.querySelectorAll("a"));
+              links.forEach(link => {
+                link.style.opacity = "0";
+                link.style.transform = "scale(0.9)";
               });
-            }, (specialUser ? waitTime : i * 1250));
-          });
-            group.classList.add("show");
-            group.scrollIntoView({ behavior: "smooth", block: "center" });
-            // Re-enable mission selector buttons
-            const allButtons = document.querySelectorAll("#doc-selector button");
-            allButtons.forEach(b => b.disabled = false);
-          }, (specialUser ? waitTime : 750));
+              links.forEach((link, i) => {
+                setTimeout(() => {
+                  link.style.transition = "opacity 1s ease, transform 0.5s ease";
+                  link.style.opacity = "1";
+                  link.style.transform = "scale(1)";
+                }, (specialUser ? waitTime : i * 1250));
+              });
+              group.classList.add("show");
+              group.scrollIntoView({ behavior: "smooth", block: "center" });
+            }, (specialUser ? waitTime : 1250));
+          }
         }, true);
       }, true);
     }
