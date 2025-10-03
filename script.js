@@ -259,6 +259,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
   } else {
     errorEl.textContent = "ACCESS DENIED";
     errorEl.classList.add("flash-error");
+    errorEl.style.fontSize = "2.5em"; // Increase font size
 
     // Play failure alarm
     const alarm = document.getElementById("alarm-sound");
@@ -274,11 +275,13 @@ document.getElementById("username").addEventListener("input", () => {
   const errorEl = document.getElementById("error");
   errorEl.classList.remove("flash-error");
   errorEl.textContent = "";
+  errorEl.style.fontSize = ""; // Reset font size
 });
 document.getElementById("password").addEventListener("input", () => {
   const errorEl = document.getElementById("error");
   errorEl.classList.remove("flash-error");
   errorEl.textContent = "";
+  errorEl.style.fontSize = ""; // Reset font size
 });
 
 // Beep + delay on link clicks
