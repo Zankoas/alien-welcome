@@ -190,28 +190,50 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
           const buttonFile = selectedDoc.replace(".txt", "_buttons.txt");
           try {
             const resp = await fetch(buttonFile);
-            const text = await resp.text();
           
-            // Each line format: label:url  (but URL may contain ":" so only split at the first one)
+            // If file not found or bad response, just skip buttons
+            if (!resp.ok) {
+              console.warn("No button file found for mission:", buttonFile);
+              return;
+            }
+          
+            const text = (await resp.text()).trim();
+            if (!text) {
+              console.warn("Button file is empty:", buttonFile);
+              return;
+            }
+          
+            // Each line format: label:url  (only split on first colon)
             const lines = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
             lines.forEach(line => {
-              // ignore comment lines
-              if (line.startsWith("#")) return;
-            
               const idx = line.indexOf(":");
-              if (idx === -1) return; // malformed line, skip
+              if (idx === -1) return; // skip malformed lines
             
               const label = line.slice(0, idx).trim();
               const url = line.slice(idx + 1).trim();
+              if (!label || !url) return;
             
-              if (label && url) {
-                const a = document.createElement("a");
-                a.href = url;
-                a.textContent = label;
-                a.target = "_blank";
-                group.appendChild(a);
-              }
+              const a = document.createElement("a");
+              a.href = url;
+              a.textContent = label;
+              a.target = "_blank";
+            
+              // 🔊 Play beep before opening
+              a.addEventListener("click", (e) => {
+                e.preventDefault();
+                const beep = document.getElementById("beep-sound");
+                if (beep) {
+                  beep.currentTime = 0;
+                  beep.play();
+                }
+                setTimeout(() => {
+                  window.open(url, "_blank");
+                }, 400);
+              });
+            
+              group.appendChild(a);
             });
+          
           } catch (err) {
             console.error("Could not load button file", buttonFile, err);
           }
