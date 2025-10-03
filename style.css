@@ -45,7 +45,7 @@ input {
 
 button {
   background: #00ff88;
-  border: none;
+  border: 1px solid #00ff88;
   color: black;
   padding: 8px;
   cursor: pointer;
