@@ -15,6 +15,9 @@ async function checkCredentials(username, password) {
   return false;
 }
 
+// Track if a mission was already opened
+let missionOpened = false;
+
 // Auto-scroll helper
 function autoScroll() {
   window.scrollTo({
@@ -158,7 +161,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
               // Continue typing into second box
               typewriter(`> DECRYPTING...............`, // old text: typewriter(`> DECRYPTING...\n> DECRYPTING...\n> DECRYPTING...`,
                 typedText2,
-                specialUser ? typeSpeed : 300,
+                missionOpened ? 50 : (specialUser ? typeSpeed : 300),
                 () => {
                   typewriter(`\n> DECRYPTED\n\n`, typedText2, specialUser ? typeSpeed : 50, () => {
                     setTimeout(startMission, specialUser ? waitTime : 750);
@@ -179,9 +182,16 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
     async function startMission() {
       const missionData = await (await fetch(selectedDoc)).text();
-      typewriter("\n" + missionData, typedText2, specialUser ? typeSpeed : 25, () => {
+
+        // ✅ 50% faster mission text if already opened
+        const missionSpeed = missionOpened
+          ? Math.max(1, Math.floor((specialUser ? typeSpeed : 25) * 0.5))
+          : (specialUser ? typeSpeed : 25);
+
+      typewriter("\n" + missionData, typedText2, missionSpeed, () => {
         // After mission data finishes, type final message
-        typewriter(`\n\n> END OF MESSAGE`, typedText2, specialUser ? typeSpeed : 200, async () => {
+        const endSpeed = missionOpened ? 50 : (specialUser ? typeSpeed : 200);
+        typewriter(`\n\n> END OF MESSAGE`, typedText2, endSpeed, async () => {
           // Reveal button group after final message
           const group = document.getElementById("button-group");
           group.innerHTML = ""; 
@@ -253,6 +263,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
               group.scrollIntoView({ behavior: "smooth", block: "center" });
             }, (specialUser ? waitTime : 1250));
           }
+          missionOpened = true;
         }, true);
       }, true);
     }
