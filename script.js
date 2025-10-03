@@ -44,7 +44,15 @@ function typewriter(text, element, speed = 50, callback = null, append = false) 
 }
 
 const documents = {
-  "> --- USCM CLASSIFIED BRIEFING: OPERATION ICARUS ---": "operation_icarus.txt"
+  "> --- USCM CLASSIFIED BRIEFING: OPERATION ICARUS ---": "operation_icarus.txt",
+  "> --- USCM CLASSIFIED BRIEFING: OPERATION OCTOPUS GARDEN ---": "operation_octopus_garden.txt",
+  "> --- USCM CLASSIFIED BRIEFING: OPERATION DEEP SHAFT ---": "operation_deep_shaft.txt",
+  "> --- USCM CLASSIFIED BRIEFING: OPERATION DREAMCATCHER ---": "operation_dreamcatcher.txt",
+  "> --- USCM CLASSIFIED BRIEFING: OPERATION GO FISH ---": "operation_go_fish.txt",
+  "> --- USCM CLASSIFIED BRIEFING: OPERATION QUIET CATCH ---": "operation_quiet_catch.txt",
+  "> --- USCM CLASSIFIED BRIEFING: OPERATION ARCTURIAN APOCALYPSE ---": "operation_arcturian_apocalypse.txt",
+  "> --- USCM CLASSIFIED BRIEFING: OPERATION BLAZE OF GLORY ---": "operation_blaze_of_glory.txt",
+  "> --- USCM CLASSIFIED BRIEFING: TRANSFER TO MARINE ASSAULT UNIT 141 ---": "transfer_to_marine_assault_unit_141.txt"
 };
 let selectedDoc = "mission.txt";
 
